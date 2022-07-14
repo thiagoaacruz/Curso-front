@@ -1,0 +1,110 @@
+<h5>Consulta de Cursos</h5>
+<p><strong>Lista dos cursos cadastrados</strong></p>
+
+<table class="table table-hover table-sm">
+  <thead>
+    <tr>
+      <td><strong>Descrição do Assunto</strong></td>
+      <td><strong>Data de Inicio</strong></td>
+      <td><strong>Data de Término</strong></td>
+      <td><strong>Quantidade de Alunos</strong></td>
+      <td><strong>Categoria</strong></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let c of curso">
+      <td>{{ c.descricaoAssunto }}</td>
+      <td>{{ c.dataInicio | date: "dd/MM/yyyy" }}</td>
+      <td>{{ c.dataTermino | date: "dd/MM/yyyy" }}</td>
+      <td>{{ c.quantidadeAluno }}</td>
+      <td>{{ c.categoria.nome }}</td>
+
+      <td>
+        <button
+          class="btn btn-sm btn-primary mr"
+          [routerLink]="['/editar-curso', c.idCurso]"
+        >
+          Editar
+        </button>
+
+        &nbsp;
+
+        <button class="btn btn-sm btn-danger" (click)="excluir(c.idCurso)">
+          Excluir
+        </button>
+      </td>
+    </tr>
+  </tbody>
+
+  <!--Total de registros: 6-->
+</table>
+<tfoot>
+  <tr>
+    <td colspan="6">Total de registros: {{ curso.length }}</td>
+  </tr>
+</tfoot>
+
+<!--Criando um espaçamento-->
+<div style="margin-top: 5%"></div>
+
+<form [formGroup]="formPeriodo" (ngSubmit)="onSubmit()">
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <label for="">Descrição do Assunto</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="descricaoAssunto"
+      />
+      <div
+        class="text-danger"
+        *ngIf="form.descricaoAssunto.touched && form.descricaoAssunto.invalid"
+      >
+        <span *ngIf="form.descricaoAssunto.errors.required">
+          Informe a descrição do assunto
+        </span>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <label for="">Data de Inicio</label>
+      <input type="date" class="form-control" formControlName="dataInicio" />
+      <div
+        class="text-danger"
+        *ngIf="form.dataInicio.touched && form.dataInicio.invalid"
+      >
+        <span *ngIf="form.dataInicio.errors.required">
+          Informe a Data de Inicio
+        </span>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <label for="">Data de Término</label>
+      <input type="date" class="form-control" formControlName="dataTermino" />
+      <div
+        class="text-danger"
+        *ngIf="form.dataTermino.touched && form.dataTermino.invalid"
+      >
+        <span *ngIf="form.dataTermino.errors.required">
+          Informe a Data de Término
+        </span>
+      </div>
+    </div>
+
+    <div class="row mb-3" style="margin-top: 1%">
+      <div class="col-md-12">
+        <input
+          type="submit"
+          [disabled]="!formPeriodo.valid"
+          class="btn btn-success"
+          value="Consultar"
+        />
+      </div>
+    </div>
+
+    <form></form>
+  </div>
+</form>
+
+

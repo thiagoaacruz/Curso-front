@@ -1,0 +1,99 @@
+<h1>Cadastro de Cursos</h1>
+<h5>Preencha os campos para cadastro do curso</h5>
+
+<!--[formGroup]="formCadastro" antigo formgroup-->
+<form class="s" [formGroup]="formCadastro" (ngSubmit)="onSubmit()">
+  <div *ngIf="mensagem" class="mb-3 alert alert-primary">
+    <strong>{{ mensagem }}</strong>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <label for="">Descrição do Assunto</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="descricaoAssunto"
+      />
+      <div
+        class="text-danger"
+        *ngIf="form.descricaoAssunto.touched && form.descricaoAssunto.invalid"
+      >
+        <span *ngIf="form.descricaoAssunto.errors.required">
+          Informe a descrição do assunto
+        </span>
+      </div>
+     </div>
+
+    <div class="col-md-3">
+      <label for="">Data de Inicio</label>
+      <input type="date" class="form-control" formControlName="dataInicio" />
+      <div
+        class="text-danger"
+        *ngIf="form.dataInicio.touched && form.dataInicio.invalid"
+      >
+        <span *ngIf="form.dataInicio.errors.required">
+          Informe a Data de Inicio
+        </span>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <label for="">Data de Término</label>
+      <input type="date" class="form-control" formControlName="dataTermino" />
+      <div
+        class="text-danger"
+        *ngIf="form.dataTermino.touched && form.dataTermino.invalid"
+      >
+        <span *ngIf="form.dataTermino.errors.required">
+          Informe a Data de Término
+        </span>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <label for="">Quantidade de Alunos</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="quantidadeAluno"
+      />
+      <div
+        class="text-danger"
+        *ngIf="form.quantidadeAluno.touched && form.quantidadeAluno.invalid"
+      >
+        <span *ngIf="form.quantidadeAluno.errors.required">
+          Informe a Quantidade de alunos
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group col-md-3" >
+      <label for="sel1">Categoria</label>
+      <select class="form-control" formControlName="categoria" id="sel1">
+
+        <option *ngFor="let categoria of categorias" value="{{categoria.idCategoria}}">{{categoria.nome}}</option>
+
+      </select>
+    </div>
+
+
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-12">
+      <input
+        type="submit"
+        [disabled]="!formCadastro.valid"
+        class="btn btn-success"
+        value="Realizar o Cadastro"
+      />
+    </div>
+  </div>
+</form>
+
+<div class="row mb-3">
+  <div class="col-md-12">
+      <input type="submit" class="btn btn-primary" routerLink="/consultar-curso" value="voltar">
+  </div>
+</div>

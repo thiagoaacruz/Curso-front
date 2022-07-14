@@ -1,0 +1,7 @@
+body {
+  background-image: url("assets/fundo3.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  opacity: 1.5;
+}
